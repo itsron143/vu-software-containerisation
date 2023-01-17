@@ -6,7 +6,7 @@ Project space for Software Containerisation, VU Amsterdam.
 
 `python 3.8.0` (preferably a virtual environment)
 
-Go inside `pushups_logger` and install all the libraries required
+Go inside `pushups-logger` and install all the libraries required
 
 ```bash
 cd pushups-logger

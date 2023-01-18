@@ -9,10 +9,8 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
 
-    # TODO: add environ variable for postgres URL?
-    # TODO: add db_username and db_password as env. variables?
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://club21:password@localhost/pushups-logger'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://club21:password@postgres:5432/pushups-logger'
 
     db.init_app(app)
 
@@ -45,4 +43,5 @@ def init_db(app, db):
         # create tables
         db.drop_all()
         db.create_all()
+        db.session.commit()
         print("Created tables: User and Workout!")

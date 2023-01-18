@@ -2,19 +2,18 @@
 
 Project space for Software Containerisation, VU Amsterdam.
 
-### Flask Web App Requirements
+# Docker Instructions
 
-`python 3.8.0` (preferably a virtual environment)
-
-Go inside `pushups-logger` and install all the libraries required
+> make sure you have docker installed.
 
 ```bash
-cd pushups-logger
-pip install -r requirements.txt
+docker-compose up -d
 ```
 
-if everything was installed successfully, run the server locally (ensure you have postgres up and running).
+Check if docker containers are running:
 
 ```bash
-python app.py
+docker ps
 ```
+
+The web app should be avaialble at localhost:5001

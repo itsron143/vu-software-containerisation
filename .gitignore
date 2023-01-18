@@ -1,9 +1,7 @@
 .DS_Store
-.env
 .flaskenv
 *.pyc
 *.pyo
-env/
 venv/
 .venv/
 **/bin/
@@ -12,7 +10,6 @@ venv/
 **/var/
 **/tutorials/
 **/__pycache__
-env*
 dist/
 build/
 *.egg

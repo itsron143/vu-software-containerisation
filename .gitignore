@@ -4,6 +4,7 @@
 *.pyo
 venv/
 .venv/
+.env
 **/bin/
 **/include/
 **/lib/

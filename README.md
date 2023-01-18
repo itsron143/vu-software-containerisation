@@ -4,6 +4,14 @@ Project space for Software Containerisation, VU Amsterdam.
 
 # Docker Instructions
 
+Add a `.env` file at the root of the project. The file format is like this:
+
+```
+POSTGRES_USER=<FILL_UP>
+POSTGRES_PASSWORD=<FILL_UP>
+POSTGRES_DB=<FILL_UP>
+```
+
 > make sure you have docker installed.
 
 ```bash

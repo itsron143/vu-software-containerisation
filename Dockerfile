@@ -1,6 +1,8 @@
-FROM python:3.8.0-slim
-RUN apt-get update
-RUN apt-get install -y libpq-dev python3-dev python-dev libevent-dev postgresql-client
+FROM python:3.8-alpine
+RUN apk update && \
+    apk add --virtual build-deps gcc musl-dev && \
+    apk add postgresql-dev && \
+    rm -rf /var/cache/apk/*
 RUN mkdir /pushups_logger
 WORKDIR /pushups_logger
 COPY . /pushups_logger

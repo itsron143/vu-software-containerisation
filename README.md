@@ -24,4 +24,4 @@ Check if docker containers are running:
 docker ps
 ```
 
-The web app should be avaialble at localhost:5001
+The web app should be avaialble at `localhost:5001`

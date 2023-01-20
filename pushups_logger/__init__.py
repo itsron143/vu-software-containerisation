@@ -1,6 +1,10 @@
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+
+from dotenv import load_dotenv
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
@@ -9,8 +13,16 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
 
+    load_dotenv()
+
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://club21:password@postgres:5432/pushups-logger'
+
+    POSTGRES_USERNAME = os.getenv('POSTGRES_USER')
+    POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
+    POSTGRES_DB = os.getenv('POSTGRES_DB')
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{}:{}@postgres:5432/{}'.format(
+        POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DB)
 
     db.init_app(app)
 

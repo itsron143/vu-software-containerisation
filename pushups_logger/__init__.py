@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy_utils import create_database, database_exists
 from flask_login import LoginManager
 
 from dotenv import load_dotenv
@@ -23,6 +24,16 @@ def create_app():
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{}:{}@postgres:5432/{}'.format(
         POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DB)
+
+    db_url = app.config['SQLALCHEMY_DATABASE_URI']
+
+    if not database_exists(db_url):
+        try:
+            create_database(db_url)
+            print("Database pushups-logger created!")
+        except Exception as e:
+            print("Error creating database...")
+            print(e)
 
     db.init_app(app)
 

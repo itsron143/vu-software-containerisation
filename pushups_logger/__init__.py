@@ -22,18 +22,18 @@ def create_app():
     POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
     POSTGRES_DB = os.getenv('POSTGRES_DB')
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{}:{}@postgres:5432/{}'.format(
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{}:{}@postgres/{}'.format(
         POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DB)
 
-    db_url = app.config['SQLALCHEMY_DATABASE_URI']
+    # db_url = app.config['SQLALCHEMY_DATABASE_URI']
 
-    if not database_exists(db_url):
-        try:
-            create_database(db_url)
-            print("Database pushups-logger created!")
-        except Exception as e:
-            print("Error creating database...")
-            print(e)
+    # if not database_exists(db_url):
+    #     try:
+    #         create_database(db_url)
+    #         print("Database pushups-logger created!")
+    #     except Exception as e:
+    #         print("Error creating database...")
+    #         print(e)
 
     db.init_app(app)
 

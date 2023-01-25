@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    name: pushups_logger
+  name: pushups_logger
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pushups_logger
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pushups_logger
+    spec:
+      containers:
+        - env:
+            - name: APP_SETTINGS
+              value: project.config.DevelopmentConfig
+            - name: POSTGRES_USER
+              value: club21
+            - name: POSTGRES_DB
+              value: pushups-logger
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: postgres-secret
+          image: itsron143/pushups_logger:latest
+          imagePullPolicy: Always
+          name: pushups_logger
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

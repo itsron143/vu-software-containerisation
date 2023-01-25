@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    name: pushups_logger
-  name: pushups_logger
+    name: pushups-logger
+  name: pushups-logger
 spec:
   progressDeadlineSeconds: 2147483647
   replicas: 1
   selector:
     matchLabels:
-      app: pushups_logger
+      app: pushups-logger
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: pushups_logger
+        app: pushups-logger
     spec:
       containers:
         - env:
@@ -32,7 +32,7 @@ spec:
                   name: postgres-secret
           image: itsron143/pushups_logger:latest
           imagePullPolicy: Always
-          name: pushups_logger
+          name: pushups-logger
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File

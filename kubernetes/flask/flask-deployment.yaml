@@ -26,16 +26,15 @@ spec:
             - name: POSTGRES_DB
               value: pushups-logger
             - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: POSTGRES_PASSWORD
-                  name: postgres-secret
+              value: password
           image: itsron143/pushups-logger:latest
           imagePullPolicy: Always
           name: pushups-logger
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do echo hello; sleep 10;done"]
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

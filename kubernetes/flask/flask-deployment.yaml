@@ -30,7 +30,7 @@ spec:
                 secretKeyRef:
                   key: POSTGRES_PASSWORD
                   name: postgres-secret
-          image: itsron143/pushups_logger:latest
+          image: itsron143/pushups-logger:latest
           imagePullPolicy: Always
           name: pushups-logger
           resources: {}

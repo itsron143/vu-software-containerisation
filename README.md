@@ -2,26 +2,25 @@
 
 Project space for Software Containerisation, VU Amsterdam.
 
-# Docker Instructions
+# Kubernetes Deployment Instructions
 
-Add a `.env` file at the root of the project. The file format is like this:
+> make sure you have docker and microk8s installed on your vm.
 
-```
-POSTGRES_USER=<FILL_UP>
-POSTGRES_PASSWORD=<FILL_UP>
-POSTGRES_DB=<FILL_UP>
-```
-
-> make sure you have docker installed.
+Start microk8s and enable `DNS`:
 
 ```bash
-docker-compose up -d
+microk8s start; microk8s enable dns;
 ```
-
-Check if docker containers are running:
 
 ```bash
-docker ps
+sudo ./deploy.sh
 ```
 
-The web app should be avaialble at `localhost:5001`
+If the above script runs successfully, check if pods are running:
+```bash
+microk8s kubectl get pods
+```
+
+If both the `postgres-deployment` and `pushups-logger` pods have the 
+`STATUS` as `Running` then the web app should be avaialble at 
+`http://localhost:5001`

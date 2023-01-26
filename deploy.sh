@@ -1,8 +1,10 @@
 #!/bin/bash
 
-echo "Creating the volume..."
+echo "Setting postgres config..."
 
-microk8s kubectl apply -f postgres-config.yaml
+microk8s kubectl apply -f ./kubernetes/postgres/postgres-config.yaml
+
+echo "Creating the volume..."
 
 echo "checking if /opt/postgres/data is created or not..."
 if [ -d /opt/postgres/data ]; then
@@ -16,12 +18,12 @@ microk8s kubectl apply -f ./kubernetes/postgres/postgres-storage.yaml
 
 echo "Creating the database credentials..."
 
-microk8s kubectl apply -f ./kubernetes/postgres/postgres-secret.yml
+microk8s kubectl apply -f ./kubernetes/postgres/postgres-secret.yaml
 
 echo "Creating the postgres deployment and service..."
 
-microk8s kubectl create -f ./kubernetes/postgres/postgres-deployment.yml
-microk8s kubectl create -f ./kubernetes/postgres/postgres-service.yml
+microk8s kubectl create -f ./kubernetes/postgres/postgres-deployment.yaml
+microk8s kubectl create -f ./kubernetes/postgres/postgres-service.yaml
 
 echo "Waiting for postgres..."
 
@@ -33,8 +35,8 @@ echo "PostgreSQL started"
 
 echo "Creating the flask deployment and service..."
 
-microk8s kubectl create -f ./kubernetes/flask/flask-deployment.yml
-microk8s kubectl create -f ./kubernetes/flask/flask-service.yml
+microk8s kubectl create -f ./kubernetes/flask/flask-deployment.yaml
+microk8s kubectl create -f ./kubernetes/flask/flask-service.yaml
 
 
 # echo "Adding the ingress..."

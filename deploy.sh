@@ -4,6 +4,9 @@ echo "Setting postgres config..."
 
 microk8s kubectl apply -f ./kubernetes/postgres/postgres-config.yaml
 
+echo "Creating the database credentials..."
+microk8s kubectl apply -f ./kubernetes/postgres/postgres-secret.yaml
+
 echo "Creating the volume..."
 
 echo "checking if /opt/postgres/data is created or not..."
@@ -16,9 +19,6 @@ echo "creating /opt/postgres/data ..."
 sudo mkdir -p /opt/postgres/data
 
 microk8s kubectl apply -f ./kubernetes/postgres/postgres-storage.yaml
-
-echo "Creating the database credentials..."
-microk8s kubectl apply -f ./kubernetes/postgres/postgres-secret.yaml
 
 echo "Creating the postgres deployment and service..."
 microk8s kubectl create -f ./kubernetes/postgres/postgres-deployment.yaml

@@ -12,7 +12,7 @@ else
   sudo mkdir -p /opt/postgres/data
 fi
 
-microk8s kubectl apply -f postgres-storage.yaml
+microk8s kubectl apply -f ./kubernetes/postgres/postgres-storage.yaml
 
 echo "Creating the database credentials..."
 

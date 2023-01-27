@@ -5,8 +5,11 @@ metadata:
   labels:
     service: pushups-logger
 spec:
+  ports: 
+    - port: 80
+      protocol: TCP 
+      name: 
+      targetPort: 5001
   selector:
     app: pushups-logger
-  ports:
-    - port: 5001
-      targetPort: 5001
+  type: LoadBalancer

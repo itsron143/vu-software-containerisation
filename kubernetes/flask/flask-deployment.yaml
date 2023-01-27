@@ -30,6 +30,9 @@ spec:
           image: itsron143/pushups-logger:latest
           imagePullPolicy: Always
           name: pushups-logger
+          ports: 
+            - containerPort: 5001
+              protocol: TCP 
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File

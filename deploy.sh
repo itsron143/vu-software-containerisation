@@ -2,6 +2,7 @@
  
 echo "Enable microk8s DNS"
 microk8s enable dns
+microk8s enable ingress
  
 echo "Setting postgres config..."
  
@@ -36,6 +37,10 @@ microk8s kubectl get pods
 echo "Creating the flask deployment and service..."
 microk8s kubectl create -f ./kubernetes/flask/flask-deployment.yaml
 microk8s kubectl create -f ./kubernetes/flask/flask-service.yaml
- 
+
+echo "waiting 10 seconds for flask pods to start..."
+sleep 10
+microk8s kubectl create -f ./kubernetes/flask/flask-ingress.yaml
+
 echo "Check pods again to see if pushups-logger pod is running..."
 microk8s kubectl get pods 

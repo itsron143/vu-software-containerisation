@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: 
+  name: pushups-logger-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-direct: "false"    
+spec:
+  rules: 
+    - http: 
+        paths:
+          - backend:
+              service: 
+                name: pushups-logger
+                port:
+                  number: 5001
+            path: /
+            pathType: Prefix 

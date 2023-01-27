@@ -19,14 +19,6 @@ spec:
     spec:
       containers:
         - env:
-            - name: APP_SETTINGS
-              value: project.config.DevelopmentConfig
-            - name: POSTGRES_USER
-              value: club21
-            - name: POSTGRES_DB
-              value: pushups-logger
-            - name: POSTGRES_PASSWORD
-              value: password
           image: itsron143/pushups-logger:latest
           imagePullPolicy: Always
           name: pushups-logger

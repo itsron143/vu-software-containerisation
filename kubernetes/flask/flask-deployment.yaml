@@ -18,11 +18,14 @@ spec:
         app: pushups-logger
     spec:
       containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
         - env:
-          image: itsron143/pushups-logger:latest
-          imagePullPolicy: Always
-          name: pushups-logger
-          resources: {}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           command: ["/bin/sh"]

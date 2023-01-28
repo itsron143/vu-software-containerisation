@@ -8,5 +8,5 @@ spec:
   selector:
     app: pushups-logger
   ports:
-    - port: 5001
+    - port: {{ .Values.service.port }}
       targetPort: 5001

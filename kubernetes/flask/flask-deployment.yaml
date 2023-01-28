@@ -18,18 +18,15 @@ spec:
         app: pushups-logger
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
         - env:
-          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+          image: itsron143/pushups-logger:latest
+          imagePullPolicy: Always
+          name: pushups-logger
+          resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-          command: ["python"]
-          args: ["app.py"]
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do echo hello; sleep 10;done"]
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

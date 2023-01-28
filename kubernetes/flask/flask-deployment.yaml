@@ -28,8 +28,8 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-          command: ["/bin/sh"]
-          args: ["-c", "while true; do echo hello; sleep 10;done"]
+          command: ["python"]
+          args: ["app.py"]
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

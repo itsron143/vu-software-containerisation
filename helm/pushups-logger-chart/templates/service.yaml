@@ -8,6 +8,6 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: 5001
+      targetPort: {{ .Values.service.port }}
   selector:
     {{- include "pushups-logger-chart.selectorLabels" . | nindent 4 }}

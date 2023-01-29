@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "pushups-logger-chart.labels" . | nindent 4 }}
 spec:
+  progressDeadlineSeconds: 2147483647
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
@@ -37,6 +38,10 @@ spec:
             - containerPort: 5001
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          command: ["python"]
+          args: ["app.py"]
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

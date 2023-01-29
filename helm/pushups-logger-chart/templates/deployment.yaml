@@ -28,6 +28,12 @@ spec:
       serviceAccountName: {{ include "pushups-logger-chart.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: check-db-ready
+          image: postgres:9.6.5
+          command: ['sh', '-c',
+            'until pg_isready -h postgres -p 5432;
+            do echo waiting for database; sleep 2; done;']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

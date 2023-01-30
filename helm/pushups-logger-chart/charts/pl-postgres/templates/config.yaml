@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: postgres-helm-config
-  labels:
-    app: postgres
-data:
-  POSTGRES_DB: pushups-logger
-  POSTGRES_USER: club21

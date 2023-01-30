@@ -9,8 +9,5 @@ spec:
   ports:
     - port: {{ .Values.service.port }}
       nodePort: 30001
-# targetPort: http
-     # protocol: TCP
-     # name: http
   selector:
     {{- include "pl-postgres.selectorLabels" . | nindent 4 }}

@@ -34,29 +34,19 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-           # - name: http
             - containerPort: 5432
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          envFrom:
-            - configMapRef:
-                name: postgres-helm-config
           env:
             - name: POSTGRES_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-helm-config
-                  key: POSTGRES_USER
+              value: {{ default "" .Values.postgresUser | quote }}
             - name: POSTGRES_DB
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres-helm-config
-                  key: POSTGRES_DB
+              value: {{ default "" .Values.postgresDB | quote}}
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-helm-secret
-                  key: POSTGRES_PASSWORD
+                  key: postgres-password
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb

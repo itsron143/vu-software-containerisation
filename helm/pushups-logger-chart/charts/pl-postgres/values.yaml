@@ -80,3 +80,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+postgresUser: club21
+postgresPassword: password
+postgresDB: pushups-logger
+allowEmptyPassword: false

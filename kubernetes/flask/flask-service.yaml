@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pushups-logger
+  name: rest-api
   labels:
-    service: pushups-logger
+    service: rest-api
 spec:
   selector:
-    app: pushups-logger
+    app: rest-api
   ports:
     - port: 5001
       targetPort: 5001

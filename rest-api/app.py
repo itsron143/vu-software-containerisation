@@ -1,12 +1,25 @@
+import os
+
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+
+from dotenv import load_dotenv
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@postgres:5432/people"
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
+load_dotenv()
+
+app.config['SECRET_KEY'] = 'secret-key-goes-here'
+
+POSTGRES_USERNAME = os.getenv('POSTGRES_USER', 'postgres')
+POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD', 'postgres')
+POSTGRES_DB = os.getenv('POSTGRES_DB', 'people')
+
+print(POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DB)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{}:{}@postgres:5432/{}'.format(
+        POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DB)
+db = SQLAlchemy(app)
 
 class PeopleModel(db.Model):
     __tablename__ = 'people'
@@ -45,6 +58,13 @@ def handle_people():
 
         return {"count": len(results), "humans": results}
 
+def init_db(app, db):
+    with app.app_context():
+        # create tables
+        db.drop_all()
+        db.create_all()
+        db.session.commit()
+        print("Created table: People!")
 
 @app.route('/')
 def hello():
@@ -52,5 +72,5 @@ def hello():
 
 
 if __name__ == '__main__':
-    # init_db(app, db)
+    init_db(app, db)
     app.run(debug=True, port=5001)

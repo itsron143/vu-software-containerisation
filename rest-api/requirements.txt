@@ -1,7 +1,6 @@
 Flask
 flask_login
 flask_sqlalchemy
-Werkzeug
 psycopg2-binary
-python-dotenv
 SQLAlchemy-Utils
+python-dotenv

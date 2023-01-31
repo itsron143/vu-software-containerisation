@@ -3,9 +3,10 @@ RUN apk update && \
     apk add --virtual build-deps gcc musl-dev && \
     apk add postgresql-dev && \
     rm -rf /var/cache/apk/*
-RUN mkdir /pushups_logger
-WORKDIR /pushups_logger
-COPY . /pushups_logger
+RUN mkdir /rest-api
+WORKDIR /rest-api
+COPY rest-api/* /rest-api/
 RUN pip install -U pip
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5001
+CMD ["python", "app.py"]

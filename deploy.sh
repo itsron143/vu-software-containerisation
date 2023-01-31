@@ -36,6 +36,9 @@ microk8s kubectl get pods
 echo "Creating the flask deployment and service..."
 microk8s kubectl create -f ./kubernetes/flask/flask-deployment.yaml
 microk8s kubectl create -f ./kubernetes/flask/flask-service.yaml
+
+echo "Waiting 10 secs for flask to begin..."
+sleep 10
  
-echo "Check pods again to see if pushups-logger pod is running..."
-microk8s kubectl get pods 
+echo "Check pods again to see if rest-api pod is running..."
+microk8s kubectl get pods

@@ -1,41 +1,27 @@
-const URL = "https://7695-80-112-148-91.eu.ngrok.io/people"
+const URL = "http://localhost:5001/people"
 
 function addHuman() {
   const name = document.getElementById("name").value;
-  const age = document.getElementById("age").value;
-  const data = { name, age };
+  const age = Number(document.getElementById("age").value);
+  const data = { 'name': name, "age": age };
 
-  fetch(URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-    .then(response => console.log(response.text()))
-    .then(data => {
-      if (data) {
-        localStorage.setItem("response", data);
-        window.location.href = "response.html";
-      }
+  let request = new Request(URL, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: new Headers({
+      'Content-Type': 'application/json; charset=UTF-8'
     })
-    .catch(error => {
-      console.error("Error:", error);
-    });
+  });
 
-}
+  fetch(request)
+  .then((response) => {
+    return response.text();
+  }).then((data) => {
+    console.log(data);
+    localStorage.setItem("response", data);
+    window.location.href = "response.html";
+  }).catch(function(error) {
+    console.log(error);
+  });
 
-
-function showHumans() {
-  fetch(URL)
-    .then(response => response.json())
-    .then(data => {
-      if (data && data.humans && data.humans.length) {
-        localStorage.setItem("humans", JSON.stringify(data.humans));
-        window.location.href = "show_humans.html";
-      }
-    })
-    .catch(error => {
-      console.error("Error:", error);
-    });
 }

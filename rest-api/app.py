@@ -20,7 +20,7 @@ POSTGRES_DB = os.getenv('POSTGRES_DB', 'people')
 
 print(POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DB)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{}:{}@localhost:5432/{}'.format(
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{}:{}@postgres:5432/{}'.format(
         POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_DB)
 db = SQLAlchemy(app)
 

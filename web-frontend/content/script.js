@@ -1,4 +1,4 @@
-const URL = "http://localhost:5001/people"
+const URL = "http://rest-api:5001/people"
 
 function addHuman() {
   const name = document.getElementById("name").value;

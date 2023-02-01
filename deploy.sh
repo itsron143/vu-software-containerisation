@@ -42,3 +42,13 @@ sleep 10
  
 echo "Check pods again to see if rest-api pod is running..."
 microk8s kubectl get pods
+
+echo "Creating web-frontend deployment and service..."
+microk8s kubectl apply -f ./kubernetes/web-frontend/web-deployment.yaml
+microk8s kubectl apply -f ./kubernetes/web-frontend/web-service.yaml
+
+echo "Waiting 10 seconds for web-front service to start..."
+sleep 10
+
+echo "Check pods again to see if web-frontend pod is running..."
+microk8s kubectl get pods

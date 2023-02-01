@@ -1,0 +1,29 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres-helm-pv-volume
+  labels:
+    type: local
+    {{- include "postgres-chart.labels" . | nindent 4}}
+spec:
+  storageClassName: microk8s-hostpath
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/opt/helm-postgres/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-helm-pv-claim
+  labels:
+    {{- include "postgres-chart.labels" . | nindent 4}}
+spec:
+  storageClassName: microk8s-hostpath
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi

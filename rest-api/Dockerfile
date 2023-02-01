@@ -5,7 +5,8 @@ RUN apk update && \
     rm -rf /var/cache/apk/*
 RUN mkdir /rest-api
 WORKDIR /rest-api
-COPY rest-api/* /rest-api/
+COPY requirements.txt /rest-api/
+COPY app.py /rest-api/
 RUN pip install -U pip
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5001

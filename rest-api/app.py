@@ -2,7 +2,6 @@ import os
 
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv
 
 app = Flask(__name__)
@@ -10,9 +9,6 @@ app = Flask(__name__)
 load_dotenv()
 
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
-app.config['CORS_HEADERS'] = 'Content-Type'
-
-cors = CORS(app, resources={r"/people": {"origins": "http://localhost:port"}})
 
 POSTGRES_USERNAME = os.getenv('POSTGRES_USER', 'postgres')
 POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD', 'postgres')
@@ -40,7 +36,6 @@ class PeopleModel(db.Model):
 
 
 @app.route('/people', methods=['POST', 'GET'])
-@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def handle_people():
     if request.method == 'POST':
         if request.is_json:
@@ -77,4 +72,4 @@ def hello():
 
 if __name__ == '__main__':
     init_db(app, db)
-    app.run(debug=True, port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5001)

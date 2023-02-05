@@ -55,12 +55,12 @@ ingress:
 #---------------------------------------------------------------------------------
 # Comment the two lines below out if you're not using cert-manager as CA.
 # The lower line should be staging while testing the TLS but production otherwise.
-#    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: nginx
 #    cert-manager.io/cluster-issuer: staging
 #---------------------------------------------------------------------------------
 # The lines below are stuff that may come in handy if TLS doesn't work
-#    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-#    acme.cert-manager.io/http01-edit-in-place: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    acme.cert-manager.io/http01-edit-in-place: "true"
 #    cert-manager.io/issue-temporary-certificate: "true"
 #  kubernetes.io/tls-acme: "true"
 #--------------------------------------------------------------------------------
@@ -70,27 +70,19 @@ ingress:
         - path: /
           pathType: Prefix
           backEnd:
-            serviceName: rest-api
-            servicePort: 5001
-#        - path: /rest
-#          pathType: Prefix
-#          backend:
-#            serviceName: rest-api
-#            servicePort: 5001
+            serviceName: web-frontend
+            servicePort: 80
     - host: rest.humanslogger.com
       paths:
         - path: /
           pathType: Prefix
           backend:
-            service:
-            name: web-frontend
-            port:
-              number: 80
+            serviceName: rest-api
+            servicePort: 5001
   tls:
     - secretName: humanslogger
       hosts:
         - humanslogger.com
-  #      - chart-example.local
 
 cert-manager:
   enabled: true

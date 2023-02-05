@@ -22,24 +22,13 @@ spec:
           image: itsron143/rest-api:latest
           imagePullPolicy: Always
           name: rest-api
-          ports:
-            - name: https
-              containerPort: 5001
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           command: ["python"]
           args: ["app.py"]
-          volumeMounts:
-           - name: tls-certs
-             mountPath: /etc/tls
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-      volumes:
-      - name: tls-certs
-        secret:
-          secretName: rest-api-certs
-          

@@ -9,12 +9,6 @@ spec:
     app: rest-api
   type: NodePort
   ports:
-    - name: https
-      port: 5001
+    - port: 5001
       targetPort: 5001
-      nodePort: 30003
-    - name: http 
-      port: 80
-      targetPort: 8080
       nodePort: 30002
-  externalTrafficPolicy: Local

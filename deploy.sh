@@ -64,7 +64,7 @@ microk8s kubectl apply -f ./kubernetes/flask/flask-secret.yaml
 microk8s kubectl create -f ./kubernetes/flask/flask-deployment.yaml
 microk8s kubectl create -f ./kubernetes/flask/flask-service.yaml
 microk8s kubectl create -f ./kubernetes/flask/flask-network-policy.yaml
-
+microk8s kubectl create -f ./kubernetes/flask/flask-ingress.yaml
 
 echo "Waiting 10 secs for flask to begin..."
 sleep 10
@@ -76,6 +76,10 @@ echo "Creating web-frontend deployment and service..."
 microk8s kubectl apply -f ./kubernetes/web-frontend/web-deployment.yaml
 microk8s kubectl apply -f ./kubernetes/web-frontend/web-service.yaml
 microk8s kubectl apply -f ./kubernetes/web-frontend/web-network-policy.yaml
+microk8s kubectl apply -f ./kubernetes/web-frontend/web-ingress.yaml
+
+echo "Issuing TLS certificates..."
+microk8s kubectl apply -f ./kubernetes/clusterissuer.yaml
 
 
 echo "Waiting 10 seconds for web-front service to start..."

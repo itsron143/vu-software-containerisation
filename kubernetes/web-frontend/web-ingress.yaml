@@ -2,9 +2,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned-issuer
+    cert-manager.io/common-name: humanslogger.com
 spec:
   rules:
-    - host: humanslogger.com
+    - host: frontend.humanslogger.com
       http:
         paths:
           - path: /
@@ -14,3 +17,7 @@ spec:
                 name: web-frontend
                 port:
                   number: 80
+  tls:
+    - secretName: frontend-secret
+      hosts:
+        - humanslogger.com

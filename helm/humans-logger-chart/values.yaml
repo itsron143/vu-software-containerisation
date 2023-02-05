@@ -49,6 +49,7 @@ ingress:
 # Comment the two lines below out if you're not using self-signed certificates.
     cert-manager.io/issuer: my-ca-issuer
     cert-manager.io/common-name: humanslogger.com
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 #---------------------------------------------------------------------------------
 # Comment the two lines below out if you're not using cert-manager as CA.
 # The lower line should be staging while testing the TLS but production otherwise.
@@ -66,9 +67,14 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-          frontEnd:
+          backEnd:
            serviceName: web-frontend
            servicePort: 80
+        - path: /rest
+          pathType: Prefix
+          backend:
+            serviceName: rest-api
+            servicePort: 5001
   tls:
     - secretName: humanslogger
       hosts:
@@ -76,7 +82,7 @@ ingress:
   #      - chart-example.local
 
 cert-manager:
-  enabled: false
+  enabled: true
   namespace: cert-manager
 
 resources: {}

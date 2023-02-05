@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned-issuer
+    cert-manager.io/common-name: humanslogger.com
+  name: flask-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: rest.humanslogger.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rest-api
+            port:
+              number: 5001
+  tls:
+    - secretName: rest-secret
+      hosts:
+        - humanslogger.com

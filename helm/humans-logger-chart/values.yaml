@@ -47,9 +47,11 @@ ingress:
   annotations:
 #---------------------------------------------------------------------------------
 # Comment the two lines below out if you're not using self-signed certificates.
-    cert-manager.io/issuer: my-ca-issuer
+    cert-manager.io/issuer: selfsigned-issuer
     cert-manager.io/common-name: humanslogger.com
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#    nginx.ingress.kubernetes.io/rewrite-target: /
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
+#    nginx.ingress.kubernetes.io/use-regex: "true"
 #---------------------------------------------------------------------------------
 # Comment the two lines below out if you're not using cert-manager as CA.
 # The lower line should be staging while testing the TLS but production otherwise.
@@ -63,18 +65,27 @@ ingress:
 #  kubernetes.io/tls-acme: "true"
 #--------------------------------------------------------------------------------
   hosts:
-    - host: humanslogger.com
+    - host: frontend.humanslogger.com
       paths:
         - path: /
           pathType: Prefix
           backEnd:
-           serviceName: web-frontend
-           servicePort: 80
-        - path: /rest
-          pathType: Prefix
-          backend:
             serviceName: rest-api
             servicePort: 5001
+#        - path: /rest
+#          pathType: Prefix
+#          backend:
+#            serviceName: rest-api
+#            servicePort: 5001
+    - host: rest.humanslogger.com
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+            name: web-frontend
+            port:
+              number: 80
   tls:
     - secretName: humanslogger
       hosts:

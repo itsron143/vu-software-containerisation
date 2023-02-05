@@ -1,4 +1,4 @@
-const URL = "http://web-frontend/people"
+const URL = "/people"
 
 function addHuman() {
   const name = document.getElementById("name").value;

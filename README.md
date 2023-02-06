@@ -75,6 +75,7 @@ The repository houses all the source files for running the web application using
   `kubectl edit deployment/rest-api`: Update `terminationGracePeriodSeconds: 30` to 60.
 
   The output is similar to `deployment.apps/rest-api edited`.
+
   To see the rollout status:
 
   `kubectl rollout status deployment/rest-api`

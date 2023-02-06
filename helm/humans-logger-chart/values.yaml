@@ -47,7 +47,7 @@ ingress:
   annotations:
 #---------------------------------------------------------------------------------
 # Comment the two lines below out if you're not using self-signed certificates.
-    cert-manager.io/issuer: selfsigned-issuer
+    cert-manager.io/cluster-issuer: selfsigned-issuer
     cert-manager.io/common-name: humanslogger.com
 #    nginx.ingress.kubernetes.io/rewrite-target: /
 #    nginx.ingress.kubernetes.io/rewrite-target: /$2

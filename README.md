@@ -2,8 +2,6 @@
 
 Project space for Software Containerisation, VU Amsterdam.
 
-> NOTE: Please switch to the branch app-structure-v2.
-
 ### Description
 
 The repository houses all the source files for running the web application using microk8s and Google Kubernetes Engine. The following explains the usage of each directory:

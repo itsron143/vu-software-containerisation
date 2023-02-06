@@ -29,8 +29,9 @@ spec:
                   key: POSTGRES_PASSWORD
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgredb
+              name: postgres-pv
+              subPath: postgres
       volumes:
-        - name: postgredb
+        - name: postgres-pv
           persistentVolumeClaim:
             claimName: postgres-pv-claim

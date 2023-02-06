@@ -24,13 +24,17 @@ The repository houses all the source files for running the web application using
 
   `cd rest-api` (from root directory)
 
-  `sudo docker buildx build --platform linux/amd64,linux/arm64 -t itsron143/rest-api:latest --push .`
+  `sudo docker build -t itsron143/rest-api:latest .`
+
+  `sudo docker push itsron143/rest-api:latest`
 
   Then, we build and push the web-frontend images to the registry:
 
   `cd web-frontend` (from root directory)
 
-  `sudo docker buildx build --platform linux/amd64,linux/arm64 -t itsron143/web-frontend:latest --push .`
+  `sudo docker build -t itsron143/web-frontend:latest .`
+
+  `sudo docker push itsron143/web-frontend:latest`
 
 - Deploying the Application for the first time (on GKE):
 

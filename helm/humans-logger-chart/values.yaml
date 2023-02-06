@@ -43,50 +43,34 @@ service:
 
 ingress:
   enabled: true
-  className: ""
+#  className: ""
   annotations:
-#---------------------------------------------------------------------------------
-# Comment the two lines below out if you're not using self-signed certificates.
-    cert-manager.io/cluster-issuer: selfsigned-issuer
-    cert-manager.io/common-name: humanslogger.com
-#    nginx.ingress.kubernetes.io/rewrite-target: /
-#    nginx.ingress.kubernetes.io/rewrite-target: /$2
-#    nginx.ingress.kubernetes.io/use-regex: "true"
-#---------------------------------------------------------------------------------
-# Comment the two lines below out if you're not using cert-manager as CA.
-# The lower line should be staging while testing the TLS but production otherwise.
-    kubernetes.io/ingress.class: nginx
-#    cert-manager.io/cluster-issuer: staging
-#---------------------------------------------------------------------------------
-# The lines below are stuff that may come in handy if TLS doesn't work
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    acme.cert-manager.io/http01-edit-in-place: "true"
-#    cert-manager.io/issue-temporary-certificate: "true"
-#  kubernetes.io/tls-acme: "true"
-#--------------------------------------------------------------------------------
-  hosts:
-    - host: frontend.humanslogger.com
-      paths:
-        - path: /
-          pathType: Prefix
-          backEnd:
-            serviceName: web-frontend
-            servicePort: 80
-    - host: rest.humanslogger.com
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            serviceName: rest-api
-            servicePort: 5001
-  tls:
-    - secretName: humanslogger
-      hosts:
-        - humanslogger.com
+    kubernetes.io/ingress.global-static-ip-name: human-logger
+    networking.gke.io/managed-certificates: managed-cert
+    kubernetes.io/ingress.class: "gce"
+#  hosts:
+#    - host: frontend.humanslogger.com
+#      paths:
+#        - path: /
+#          pathType: Prefix
+#          backEnd:
+#            serviceName: web-frontend
+#            servicePort: 80
+#    - host: rest.humanslogger.com
+#      paths:
+#        - path: /
+#          pathType: Prefix
+#          backend:
+#            serviceName: rest-api
+#            servicePort: 5001
+#  tls:
+#    - secretName: humanslogger
+#      hosts:
+#        - humanslogger.com
 
-cert-manager:
-  enabled: true
-  namespace: cert-manager
+#cert-manager:
+ # enabled: true
+ # namespace: cert-manager
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

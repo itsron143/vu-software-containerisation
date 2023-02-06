@@ -21,23 +21,30 @@ The repository houses all the source files for running the web application using
 
 - Building Docker Images and Publishing to a Registry:
   First, we build and push the rest-api images to the registry:
+
   `cd rest-api` (from root directory)
 
   `sudo docker buildx build --platform linux/amd64,linux/arm64 -t itsron143/rest-api:latest --push .`
 
   Then, we build and push the web-frontend images to the registry:
+
   `cd web-frontend` (from root directory)
 
   `sudo docker buildx build --platform linux/amd64,linux/arm64 -t itsron143/web-frontend:latest --push .`
 
 - Deploying the Application for the first time (on GKE):
+
   `sudo ./deploy_gke.sh`
 
 - Pre-requisites configuration:
   `kubectl describe ingress managed-cert`: Shows the load balancer used.
+
   `kubectl get storageclass`: Shows the storage class (Can also be seen using `kubectl get pv`).
+
   `kubectl describe managedcertificates managed-cert`: Shows the certificate.
+
   `kubectl get networkpolicies`: Shows the network policies.
+
   `kubectl get roles`: Shows the roles.
 
 - Scaling the stateless application:
@@ -47,20 +54,27 @@ The repository houses all the source files for running the web application using
   `cd helm`
 
   `helm package humans-logger-chart`: Packages the `humans-logger-chart` helm chart.
+
   `helm install hl ./humans-logger-chart-1.0.0.tgz`: Installs the application.
+
   `helm ls`: To show version 1.0.0 installed.
 
   `nano humans-logger-chart/Chart.yaml`: Change the version number to `2.0.0` here `version: 1.0.0`.
+
   `helm upgrade hl ./humans-logger-chart-2.0.0.tgz`: Upgrades the application to 2.0.0.
+
   `helm ls`: To show the upgraded 2.0.0 version.
 
   `helm uninstall hl`: To uninstall the application.
+
   `helm ls`: To show the application has been uninstalled.
 
 - Deployment Rollout:
   For deployment rollout:
+
   `kubectl edit deployment/rest-api`: Update `terminationGracePeriodSeconds: 30` to 60.
   The output is similar to `deployment.apps/rest-api edited`.
   To see the rollout status:
+
   `kubectl rollout status deployment/rest-api`
   The deployment rollout can be checked by seeing the new pods created using: `kubectl get pods`

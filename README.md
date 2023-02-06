@@ -12,6 +12,7 @@ The repository houses all the source files for running the web application using
 - `web-frontend`: Includes the source file to create the frontend NGINX sercer. (also available as a docker image: `itsron143/web-frontend:latest`)
 
 `deploy.sh` can be used to deploy the application from scratch using `microk8s`.
+
 `deploy_gke.sh` can be used to deploy the application from scratch on GKE.
 
 ### Commands (Shown in the presentation)

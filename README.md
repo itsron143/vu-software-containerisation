@@ -1,26 +1,19 @@
-# Software Containerisation
+# Software Containerisation (Group 49)
 
 Project space for Software Containerisation, VU Amsterdam.
 
-# Kubernetes Deployment Instructions
+> NOTE: Please switch to the branch app-structure-v2.
 
-> make sure you have docker and microk8s installed on your vm.
+### Description
 
-Start microk8s and enable `DNS`:
+The repository houses all the source files for running the web application using microk8s and Google Kubernetes Engine. The following explains the usage of each directory:
 
-```bash
-microk8s start; microk8s enable dns;
-```
+- `kubernetes`: Includes the manifests used to deploy `postgres`, `rest-api` and `web-frontend` on microk8s and GKE.
+- `helm`: Includes the helm charts to run the application using `helm` (see helm/README.md to run the helm instructions).
+- `rest-api`: Includes the source files to create the REST-API server. (also available as a docker image: `itsron143/rest-api:latest`)
+- `web-frontend`: Includes the source file to create the frontend NGINX sercer. (also available as a docker image: `itsron143/web-frontend:latest`)
 
-```bash
-sudo ./deploy.sh
-```
+`deploy.sh` can be used to deploy the application from scratch using `microk8s`.
+`deploy_gke.sh` can be used to deploy the application from scratch on GKE.
 
-If the above script runs successfully, check if pods are running:
-```bash
-microk8s kubectl get pods
-```
-
-If both the `postgres-deployment` and `pushups-logger` pods have the 
-`STATUS` as `Running` then the web app should be avaialble at 
-`http://localhost:5001`
+### Commands (Shown in the presentation)

@@ -5,5 +5,5 @@ metadata:
   labels:
     app: postgres
 data:
-  POSTGRES_DB: pushups-logger
-  POSTGRES_USER: club21
+  POSTGRES_DB: people
+  POSTGRES_USER: postgres

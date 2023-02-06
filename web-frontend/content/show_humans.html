@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Human Blockchain</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <!-- <script src="script.js"></script> -->
+</head>
+
+<body class="d-flex flex-column align-items-center mt-5">
+  <div class="alert alert-primary" role="alert">
+    <a href="/">Human Blockchain</a>
+  </div>
+  <br>
+  <h3>Humans</h3>
+  <ul id="humans"></ul>
+
+  <script>
+    const url = '/people';
+
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let humans = data.humans;
+        console.log(humans);
+        document.getElementById('humans').innerHTML = humans.map((person) => {
+            return `<li>${ person.name }</li>`;
+        }).join('');
+      }).catch(function(error) {
+        console.log(error);
+      });
+  </script>
+
+</html>

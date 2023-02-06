@@ -3,30 +3,30 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    name: pushups-logger
-  name: pushups-logger
+    name: rest-api
+  name: rest-api
 spec:
   progressDeadlineSeconds: 2147483647
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: pushups-logger
+      app: rest-api
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: pushups-logger
+        app: rest-api
     spec:
       containers:
         - env:
-          image: itsron143/pushups-logger:latest
+          image: itsron143/rest-api:latest
           imagePullPolicy: Always
-          name: pushups-logger
+          name: rest-api
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-          command: ["/bin/sh"]
-          args: ["-c", "while true; do echo hello; sleep 10;done"]
+          command: ["python"]
+          args: ["app.py"]
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

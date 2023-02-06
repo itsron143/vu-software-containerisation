@@ -23,6 +23,7 @@ docs/_build/
 .vscode
 **/pyvenv.cfg
 **/Icon
+rest-api/migrations/
 
 # Coverage reports
 htmlcov/

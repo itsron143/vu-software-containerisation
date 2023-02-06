@@ -2,7 +2,8 @@
 
 Project space for Software Containerisation, VU Amsterdam.
 
-> The final URL exposing the web-frontend (with TLS): https://166.74.160.34.bc.googleusercontent.com/
+The final URL exposing the web-frontend (with TLS): https://166.74.160.34.bc.googleusercontent.com/
+
 > The domain name was obtained by the following process:
 > Reserve a static IP on GKE, reverseLookUp on the reserved IP which points to the above URL.
 
